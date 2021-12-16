@@ -1,5 +1,11 @@
 <!doctype html>
 <html>
+	<style>
+		.slides{
+			font-size: medium;
+			text-align: justify;
+		}
+	</style>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,8 +22,55 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>React performance optimization techniques</section>
+				<section>
+					1. Menjaga status komponen tetap lokal jika perlu
+					<br>
+					<br>
+					pembaruan status dalam komponen induk merender komponen induk dan turunannya.
+					Jadi, untuk memastikan rendering ulang komponen hanya terjadi bila diperlukan, 
+					kita dapat mengekstrak bagian kode yang peduli dengan status komponen, 
+					menjadikannya lokal untuk bagian kode tersebut. 
+					<br>
+				</section>
+				
+				<section>
+					2.Memoizing komponen React untuk mencegah rendering yang tidak perlu 
+					<br>
+					<br>
+					Tidak seperti teknik kinerja sebelumnya di mana refactoring kode kami memberi kami peningkatan kinerja, di sini kami menukar ruang memori dengan waktu. Jadi, kita hanya boleh memoize komponen jika diperlukan.
+					Memoization adalah strategi optimasi yang menyimpan operasi yang di-cache komponen, menyimpan hasilnya dalam memori, dan mengembalikan hasil yang di-cache untuk input yang sama.
+					Intinya, 
+					jika komponen anak menerima prop, komponen memo secara dangkal membandingkan prop secara default dan melewatkan rendering ulang komponen anak jika prop tidak berubah 
+				</section>
+				<section>
+					3.Pemisahan kode adalah teknik optimasi penting lainnya untuk aplikasi React.
+					<br>
+					<br>
+					Secara default, ketika aplikasi React dirender di browser, file "bundel" yang berisi seluruh kode aplikasi dimuat dan disajikan kepada pengguna sekaligus. File ini dihasilkan dengan menggabungkan semua file kode yang diperlukan untuk membuat aplikasi web berfungsi.
+					Ide bundling berguna karena mengurangi jumlah permintaan HTTP yang dapat ditangani halaman. Namun, seiring pertumbuhan aplikasi, ukuran file meningkat, sehingga meningkatkan file bundel.
+					Pada titik tertentu, peningkatan file yang berkelanjutan ini memperlambat pemuatan halaman awal, mengurangi kepuasan pengguna.
+					Dengan pemecahan kode, React memungkinkan kita untuk membagi file bundel besar menjadi beberapa potongan menggunakan dynamic import() diikuti dengan pemuatan lambat potongan-potongan ini sesuai permintaan menggunakan React.lazy. Strategi ini sangat meningkatkan kinerja halaman aplikasi React yang kompleks.
+				</section>
+				<section>
+					4.Windowing atau daftar virtualisasi di React
+					<br>
+					<br>
+					Bayangkan kita memiliki aplikasi tempat kita merender beberapa baris item pada sebuah halaman. Baik item yang ditampilkan di viewport browser atau tidak, item tersebut dirender di DOM dan dapat memengaruhi kinerja aplikasi kita.
+					Dengan konsep windowing, kita dapat merender ke DOM hanya bagian yang terlihat oleh pengguna. Kemudian, saat menggulir, item daftar yang tersisa dirender saat mengganti item yang keluar dari viewport. Teknik ini dapat sangat meningkatkan kinerja rendering daftar besar.
+					Baik react-window dan react-virtualized adalah dua perpustakaan windowing populer yang dapat mengimplementasikan konsep ini.
+				</section>
+				<section>
+					5.Memuat gambar dengan lambat di React
+					<br>
+					<br>
+					Untuk mengoptimalkan aplikasi yang terdiri dari beberapa gambar, kita dapat menghindari rendering semua gambar sekaligus untuk meningkatkan waktu buka halaman. Dengan lazy loading, kita bisa menunggu sampai setiap gambar akan muncul di viewport sebelum kita merendernya di DOM.
+					Mirip dengan konsep windowing yang disebutkan di atas, gambar lazy loading mencegah pembuatan node DOM yang tidak perlu, meningkatkan kinerja aplikasi React kami.
+					react-lazyload dan react-lazy-load-image-component adalah library lazy loading populer yang dapat digunakan dalam proyek React.<br>
+					Kesimpulan<br>
+					Untuk memulai proses pengoptimalan, pertama-tama kita harus menemukan masalah kinerja dalam aplikasi kita untuk diperbaiki. Dalam panduan ini, kami telah menjelaskan cara mengukur kinerja aplikasi React dan cara mengoptimalkan kinerja untuk pengalaman pengguna yang lebih baik.
+					Jika Anda menyukai panduan ini, pastikan Anda membagikannya ke seluruh web. Juga, beri tahu saya teknik mana yang paling menarik bagi Anda.
+				</section>
 			</div>
 		</div>
 
